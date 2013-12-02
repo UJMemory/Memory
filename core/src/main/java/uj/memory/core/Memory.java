@@ -15,7 +15,7 @@ public class Memory extends Game {
 
 	@Override
 	public void create () {
-		setScreen(introScreen);
+		setScreen(getIntroScreen());
 	}
 
 	public IntroScreen getIntroScreen() {
