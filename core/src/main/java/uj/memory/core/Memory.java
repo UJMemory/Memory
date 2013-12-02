@@ -1,45 +1,44 @@
 package uj.memory.core;
 
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
+import uj.memory.core.finish.FinishScreen;
+import uj.memory.core.game.GameScreen;
+import uj.memory.core.intro.IntroScreen;
+import uj.memory.core.menu.MenuScreen;
 
-public class Memory implements ApplicationListener {
-	Texture texture;
-	SpriteBatch batch;
-	float elapsed;
+import com.badlogic.gdx.Game;
+
+public class Memory extends Game {
+	private IntroScreen introScreen;
+	private MenuScreen menuScreen;
+	private GameScreen gameScreen;
+	private FinishScreen finishScreen;
 
 	@Override
 	public void create () {
-		texture = new Texture(Gdx.files.internal("libgdx-logo.png"));
-		batch = new SpriteBatch();
+		setScreen(introScreen);
 	}
 
-	@Override
-	public void resize (int width, int height) {
+	public IntroScreen getIntroScreen() {
+		if(introScreen == null)
+			introScreen = new IntroScreen();
+		return introScreen;
 	}
 
-	@Override
-	public void render () {
-		elapsed += Gdx.graphics.getDeltaTime();
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(texture, 100+100*(float)Math.cos(elapsed), 100+25*(float)Math.sin(elapsed));
-		batch.end();
+	public MenuScreen getMenuScreen() {
+		if(menuScreen == null)
+			menuScreen = new MenuScreen();
+		return menuScreen;
 	}
 
-	@Override
-	public void pause () {
+	public GameScreen getGameScreen() {
+		if(gameScreen == null)
+			gameScreen = new GameScreen();
+		return gameScreen;
 	}
 
-	@Override
-	public void resume () {
-	}
-
-	@Override
-	public void dispose () {
+	public FinishScreen getFinishScreen() {
+		if(finishScreen == null)
+			finishScreen = new FinishScreen();
+		return finishScreen;
 	}
 }
